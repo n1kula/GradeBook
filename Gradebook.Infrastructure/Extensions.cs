@@ -11,6 +11,7 @@ namespace Gradebook.Infrastructure
     {
         public static object AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddDbContext<GradebookDbContext>(ctx => ctx.UseSqlServer(configuration.GetConnectionString("GradebookCS")));
             return services;
