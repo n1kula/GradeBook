@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Gradebook.Application.Queries.Students.GetStudentById
 {
-    internal class GetStudentByEmailQueryHandler : IRequestHandler<GetStudentByEmailQuery, StudentDto>
+    internal class GetStudentByEmailQueryHandler : IRequestHandler<GetStudentByIdQuery, StudentDto>
     {
         private readonly IStudentRepository _studentRepository;
         private readonly IMapper _mapper;
@@ -14,7 +14,7 @@ namespace Gradebook.Application.Queries.Students.GetStudentById
             _studentRepository = studentRepository;
             _mapper = mapper;
         }
-        public  async Task<StudentDto> Handle(GetStudentByEmailQuery request, CancellationToken cancellationToken)
+        public  async Task<StudentDto> Handle(GetStudentByIdQuery request, CancellationToken cancellationToken)
         {
             var student = await _studentRepository.GetByIdAsync(request.Id, cancellationToken);
 

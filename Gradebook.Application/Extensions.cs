@@ -11,9 +11,9 @@ namespace Gradebook.Application
         public static object AddApplication(this IServiceCollection services)
         {
             var executingAssembly = Assembly.GetExecutingAssembly();
-            services.AddMediatR(executingAssembly);
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(executingAssembly));
             services.AddAutoMapper(executingAssembly);
-            services.AddScoped<IValidator<AddStudentCommand>, AddStudentCommandValidation>();
+            //services.AddScoped<IValidator<AddStudentCommand>, AddStudentCommandValidation>();
            
             return services;
         }

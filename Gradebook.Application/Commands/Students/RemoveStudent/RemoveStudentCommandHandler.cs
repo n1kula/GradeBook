@@ -26,10 +26,5 @@ namespace Gradebook.Application.Commands.Students.RemoveStudent
             _studentRepository.Delete(student);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
-
-        Task<Unit> IRequestHandler<RemoveStudentCommand, Unit>.Handle(RemoveStudentCommand request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
