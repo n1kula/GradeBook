@@ -6,14 +6,14 @@ namespace Gradebook.Application.Queries.Students.GetStudents
 {
     internal class GetStudentsQueryHandler : IRequestHandler<GetStudentsQuery, IEnumerable<StudentDto>>
     {
-        private readonly IStudentRepository _studentRepository;
-        public GetStudentsQueryHandler(IStudentRepository studentRepository)
+        private readonly IStudentReadOnlyRepository _studentReadOnlyRepository;
+        public GetStudentsQueryHandler(IStudentReadOnlyRepository studentReadOnlyRepository)
         {
-            _studentRepository = studentRepository;
+            _studentReadOnlyRepository = studentReadOnlyRepository;
         }
         public async  Task<IEnumerable<StudentDto>> Handle(GetStudentsQuery request, CancellationToken cancellationToken)
         {
-            var students = await _studentRepository.GetAllAsync(cancellationToken);
+            var students = await _studentReadOnlyRepository.GetAllAsync(cancellationToken);
 
             var studentsDto = students.Select(x => new StudentDto 
             {

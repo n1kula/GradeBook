@@ -4,7 +4,6 @@ namespace Gradebook.Domain.Abstractions
 {
     public interface IStudentRepository
     {
-        Task<IEnumerable<Student>> GetAllAsync(CancellationToken cancellation = default);
         Task<Student> GetByIdAsync(int id, CancellationToken cancellation = default);
         Task<Student> GetByEmailAsync(string email, CancellationToken cancellation = default);
         Task<bool> IsAlreadyExistAsync(string email, CancellationToken cancellation = default);

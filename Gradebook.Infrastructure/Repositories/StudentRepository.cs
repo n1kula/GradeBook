@@ -13,11 +13,6 @@ namespace Gradebook.Infrastructure.Repositories
            _dbContext = dbContext;   
         }
 
-        public async Task<IEnumerable<Student>> GetAllAsync(CancellationToken cancellation = default)
-        {
-            return await _dbContext.Students.ToListAsync(cancellation);
-        }
-
         public async Task<Student> GetByEmailAsync(string email, CancellationToken cancellation = default)
         {
             return await _dbContext.Students.SingleOrDefaultAsync(x=>x.Email == email, cancellation);
