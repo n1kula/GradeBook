@@ -2,7 +2,7 @@
 
 namespace Gradebook.Application.Commands.Students.AddStudent
 {
-    internal class AddStudentCommandValidation : AbstractValidator<AddStudentCommand>
+    public class AddStudentCommandValidation : AbstractValidator<AddStudentCommand>
     {
         public AddStudentCommandValidation()
         {
