@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+using FluentValidation;
+using Gradebook.Application.Commands.Students.AddStudent;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +13,7 @@ namespace Gradebook.Application
             var executingAssembly = Assembly.GetExecutingAssembly();
             services.AddMediatR(executingAssembly);
             services.AddAutoMapper(executingAssembly);
+            services.AddScoped<IValidator<AddStudentCommand>, AddStudentCommandValidation>();
            
             return services;
         }
