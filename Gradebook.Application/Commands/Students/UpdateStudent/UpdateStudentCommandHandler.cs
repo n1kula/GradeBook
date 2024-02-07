@@ -37,5 +37,10 @@ namespace Gradebook.Application.Commands.Students.UpdateStudent
             _studentRepository.Update(student);
             await _unitOfWork.SaveChangesAsync();
         }
+
+        Task<Unit> IRequestHandler<UpdateStudentCommand, Unit>.Handle(UpdateStudentCommand request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

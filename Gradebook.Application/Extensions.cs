@@ -10,6 +10,7 @@ namespace Gradebook.Application
         {
             var executingAssembly = Assembly.GetExecutingAssembly();
             services.AddMediatR(executingAssembly);
+            services.AddAutoMapper(executingAssembly);
            
             return services;
         }

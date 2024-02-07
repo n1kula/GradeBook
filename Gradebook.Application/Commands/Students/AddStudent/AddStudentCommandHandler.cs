@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Gradebook.Application.Dtos;
 using Gradebook.Domain.Abstractions;
 using Gradebook.Domain.Entities;
@@ -15,11 +16,13 @@ namespace Gradebook.Application.Commands.Students.AddStudent
     {
         private IStudentRepository _studentRepository;
         private IUnitOfWork _unitOfWork;
+        private IMapper _mapper;
 
-        public AddStudentCommandHandler(IStudentRepository studentRepository, IUnitOfWork unitOfWork)
+        public AddStudentCommandHandler(IStudentRepository studentRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _studentRepository = studentRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         public async Task<StudentDto> Handle(AddStudentCommand request, CancellationToken cancellationToken)
         {
@@ -41,14 +44,7 @@ namespace Gradebook.Application.Commands.Students.AddStudent
             _studentRepository.Add(newStudent);
             await _unitOfWork.SaveChangesAsync();
 
-            var studentDto = new StudentDto()
-            {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Email = request.Email,
-                Age = DateTime.Now.Year - newStudent.DOB.ToDateTime(TimeOnly.Parse("00:00")).Year,,
-                YearEnrolled = request.YearEnrolled
-            };
+            var studentDto = _mapper.Map<StudentDto>(newStudent);
             return studentDto;
         }
     }
